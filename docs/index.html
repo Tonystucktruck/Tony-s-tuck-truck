@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tony’s Tuck Truck</title>
+
+<style>
+:root{
+  --bg:#0b0b0b;
+  --gold:#d4af37;
+  --text:#e0e0e0;
+  --card:rgba(0,0,0,0.6);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+.container{
+  max-width:1000px;
+  margin:auto;
+  padding:16px;
+}
+header{
+  display:flex;
+  gap:16px;
+  align-items:center;
+  border-bottom:1px solid rgba(255,255,255,0.1);
+  padding-bottom:12px;
+}
+.logo{
+  width:90px;
+  height:90px;
+  border-radius:12px;
+  background:#222;
+}
+h1{
+  margin:0;
+  color:var(--gold);
+}
+.subtitle{
+  font-size:13px;
+}
+.card{
+  background:var(--card);
+  border:1px solid rgba(212,175,55,0.3);
+  border-radius:14px;
+  padding:14px;
+  margin-top:16px;
+}
+.phone{
+  font-size:20px;
+  color:var(--gold);
+  font-weight:bold;
+}
+ul{
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+li{
+  padding:8px 0;
+  border-bottom:1px solid rgba(255,255,255,0.1);
+}
+li:last-child{border-bottom:none}
+.buffet{color:var(--gold);font-weight:bold}
+label{
+  display:block;
+  margin-top:10px;
+  font-size:13px;
+}
+input,textarea{
+  width:100%;
+  padding:10px;
+  border-radius:8px;
+  border:1px solid rgba(255,255,255,0.2);
+  background:#000;
+  color:#fff;
+}
+button{
+  margin-top:12px;
+  padding:12px;
+  width:100%;
+  border:none;
+  border-radius:10px;
+  font-weight:bold;
+}
+.whatsapp{background:var(--gold);color:#000}
+.email{
+  background:#000;
+  color:#fff;
+  border:2px solid var(--gold);
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<header>
+  <div class="logo"></div>
+  <div>
+    <h1>Tony’s Tuck Truck</h1>
+    <div class="subtitle">Delivery Mon–Fri 08:00–14:00</div>
+  </div>
+</header>
+
+<div class="card">
+  <div>Call to order:</div>
+  <div class="phone">07749 688826</div>
+</div>
+
+<div class="card">
+<h2>Menu</h2>
+<ul>
+<li>Baguettes, Sandwiches, Salads</li>
+<li>Pies, Pasties, Sausage Rolls</li>
+<li>Bacon & Sausage Baps</li>
+<li>Hot Dogs, Chicken Wings</li>
+<li>Bacon & Cheese Turnovers</li>
+<li>Vegetable Spring Rolls & Samosas</li>
+<li>Meat Samosas</li>
+<li>Steak & Cheese Slices</li>
+<li>Cakes & Pastries, Chocolate</li>
+<li>Cold Drinks, Crisps</li>
+<li class="buffet">Buffet options available</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>Order / Message</h2>
+
+<label>Name</label>
+<input id="name">
+
+<label>Phone</label>
+<input id="phone">
+
+<label>Delivery destination</label>
+<input id="dest">
+
+<label>Order</label>
+<textarea id="order" rows="4"></textarea>
+
+<button class="whatsapp" onclick="sendWhatsApp()">Send via WhatsApp</button>
+<button class="email" onclick="sendEmail()">Send via Email</button>
+</div>
+
+</div>
+
+<script>
+const phone="447749688826";
+const email="Antonytucktruck@gmail.com";
+
+function buildMsg(){
+  const n=name.value.trim();
+  const p=phone.value.trim();
+  const d=dest.value.trim();
+  const o=order.value.trim();
+  if(!n||!p||!d||!o){alert("Please fill all fields");return null;}
+  return `Tony’s Tuck Truck Order
+Name: ${n}
+Phone: ${p}
+Destination: ${d}
+Order: ${o}`;
+}
+function sendWhatsApp(){
+  const m=buildMsg(); if(!m)return;
+  location.href=`https://wa.me/${phone}?text=`+encodeURIComponent(m);
+}
+function sendEmail(){
+  const m=buildMsg(); if(!m)return;
+  location.href=`mailto:${email}?subject=Order Request&body=`+encodeURIComponent(m);
+}
+</script>
+
+</body>
+</html>
